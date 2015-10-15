@@ -14,7 +14,7 @@ Wearable technology is the latest trend in fitness; devices such as the Fitbit a
 
 The file `activity.csv` consists of two months of data from an anonymous individual collected during the months of October and November 2012. The data includes the number of steps taken in each 5 minute interval of each day. 
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 # Load the data
 library(dplyr)
 activity <- tbl_df(read.csv('activity.csv', colClasses = c('integer', 'factor', 'integer'))) 
@@ -28,7 +28,7 @@ After loading the data into a data table `activity`, one can immediately see tha
 
 The data table `daily` groups the activity data (with missing values filtered out) by date and gives the total steps recorded from each day. A histogram of the total steps from each day is shown below. 
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 # Calculate the total number of steps taken per day
 daily <- activity %>% filter(!is.na(steps)) %>% 
     group_by(date) %>% summarize(totalSteps = sum(steps))
@@ -52,7 +52,7 @@ The distribution of total steps shown in the histogram resembles a normal distri
 
 Another useful way to check on activity trends is to monitor it over time. This will indicate when the user is most (or least) active, so the user can find ways to increase activity.
 
-```{r, warning = FALSE}
+```{r, warning=FALSE, message=FALSE}
 # Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 stepTimes <- activity %>% filter(!is.na(steps)) %>%
     group_by(interval) %>% summarize(avgSteps = mean(steps))
@@ -71,7 +71,7 @@ Earlier, the missing data was ommited during analysis; however, it may be valuab
 
 To do this, all missing data is replaced with the average number of steps for the missing data's respecitve 5-minute time interval.
 
-```{r, warning = FALSE}
+```{r, warning=FALSE, message=FALSE}
 # Calculate and report the total number of missing values in the dataset
 nrow(filter(activity, is.na(steps)))
 
@@ -98,7 +98,7 @@ Note that with the missing data filled in, the median number of steps per day is
 
 Because personal routines change drastically between weekdays and weekends, it may be a good idea to analyze the data for differences in weekend and weekday activity.
 
-```{r, warning = FALSE}
+```{r, warning=FALSE, message=FALSE}
 # Create a new factor variable in the dataset indicating whether a given date is a weekday or weekend day
 imputed <- imputed %>%
     mutate(day = as.factor(ifelse(weekdays(as.Date(date)) %in% c('Saturday', 'Sunday'), 'weekend', 'weekday')))

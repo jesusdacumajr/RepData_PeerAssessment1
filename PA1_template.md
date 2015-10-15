@@ -1,6 +1,11 @@
-# Reproducible Research: Peer Assessment 1
-Jesus Dacuma Jr.  
-October 18, 2015  
+---
+title: "Reproducible Research: Peer Assessment 1"
+author: Jesus Dacuma Jr.
+date: "October 18, 2015"
+output: 
+  html_document:
+    keep_md: true
+---
 ## Introduction
 
 Wearable technology is the latest trend in fitness; devices such as the Fitbit and Nike Fuelband enables the wearer to constantly track their movement and quantify how "active" their lifestyle is. This report analyzes data from a personal activity monitoring device for behavioral trends. Through some simple summaries of the data, one can make health recommendations based on the analysis.
@@ -13,22 +18,6 @@ The file `activity.csv` consists of two months of data from an anonymous individ
 ```r
 # Load the data
 library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-## 
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 activity <- tbl_df(read.csv('activity.csv', colClasses = c('integer', 'factor', 'integer'))) 
 str(activity)
 ```
@@ -114,7 +103,7 @@ ggplot(daily, aes(x=totalSteps)) +
     labs(title = "Histogram of Total Steps", x = "Total Number of Steps", y = "Density")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
 
 The distribution of total steps shown in the histogram resembles a normal distribution, with the mean at the center shown as a red dotted line. The owner of the personal monitoring device can use the mean as a benchmark of any improvements in fitness over time.
 
@@ -131,7 +120,7 @@ ggplot(data=stepTimes, aes(x=interval, y=avgSteps, group=2)) + geom_line() +
     labs(title = "Time Series Plot of Average Steps", x = "Time Interval", y = "Total Number of Steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 
 ```r
 # Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -197,7 +186,7 @@ ggplot(daily_new, aes(x=totalSteps)) +
     labs(title = "Histogram of Total Steps", x = "Total Number of Steps", y = "Density")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 ```r
 # Calculate and report the mean and median total number of steps taken per day.
@@ -250,7 +239,7 @@ ggplot(data=stepTimes_new, aes(x=interval, y=avgSteps, color=day)) + geom_line()
     labs(title = "Time Series Plot of Average Steps", x = "Time Interval", y = "Total Number of Steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
 Some expected differences in weekday and weekend activity become apparent when separately plotted (as shown above). The first increase in activity (when the user wakes up) occurs shortly after 5:00 AM on weekdays, while the activity gradually occurs between 6:00 and 7:30 AM. Also, the morning workout peak at 8:35 AM is gone from weekends, although the user is more active throughout the day, and even later at night.
 
